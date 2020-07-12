@@ -13,7 +13,7 @@ export default {
       throw error;
     }
   },
-  async getMovieFromSearch() {
+  async getMovieFromSearch(query) {
     try {
       const movies = await axios
         .get(`films/`)

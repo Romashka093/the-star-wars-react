@@ -2,16 +2,22 @@
 import React from 'react';
 // import css from './MovieList.module.css';
 
-const MovieList = ({ movies }) => {
-  // console.log(movies);
+const MovieList = ({ movies, foundMovies }) => {
   return (
     <ul>
-      {movies.map(movie => (
-        <li key={movie.episode_id} id={movie.episode_id}>
-          <a href={movie.url} />
-          {movie.title}
-        </li>
-      ))}
+      {foundMovies.length === 0
+        ? movies.map(movie => (
+            <li key={movie.episode_id} id={movie.episode_id}>
+              <a href={movie.url} />
+              {movie.title}
+            </li>
+          ))
+        : foundMovies.map(movie => (
+            <li key={movie.episode_id} id={movie.episode_id}>
+              <a href={movie.url} />
+              {movie.title}
+            </li>
+          ))}
     </ul>
   );
 };

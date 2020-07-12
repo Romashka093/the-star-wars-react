@@ -10,24 +10,84 @@ class Movie extends Component {
   state = {
     movies: [],
     searchQuery: '',
+    foundMovies: [],
+    isSorted: true,
+    sortedMovies: [],
   };
   componentDidMount() {
     moviesAPI.getAllMovie().then(movies => {
       this.setState({ movies });
     });
-    moviesAPI.getMovieFromSearch();
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // сделать проверки между prevProps и prevProps
+    console.log('prevState :>> ', prevState);
+    console.log('this.state :>> ', this.state);
+    if (prevState.searchQuery !== this.state.searchQuery) {
+      this.searchMovies(this.state.searchQuery);
+      const searchedMovies = this.state.movies;
+      const foundMovies = searchedMovies.filter(movie =>
+        movie.title
+          .toLowerCase()
+          .includes(this.state.searchQuery.toLowerCase()),
+      );
+      this.setState({ foundMovies });
+      this.toggleSortMovies();
+    }
   }
   // componentWillUnmount() {
   // 	// убирать слушатели после componentDidMount
   // }
 
+  sortMovies() {
+    const sortedMovies = this.state.movies;
+    let newSortedMovies = sortedMovies;
+
+    if (this.state.isSorted) {
+      newSortedMovies = sortedMovies.sort((a, b) =>
+        a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1,
+      );
+    } else {
+      newSortedMovies = sortedMovies.sort((a, b) =>
+        a.title.toLowerCase() < b.title.toLowerCase() ? 1 : -1,
+      );
+    }
+    this.setState({
+      isSorted: !this.state.isSorted,
+      sortedMovies: newSortedMovies,
+    });
+
+    const sortedMoviesFromFoundMovies = this.state.foundMovies;
+    let newSortedMoviesFromFoundMovies = sortedMoviesFromFoundMovies;
+
+    if (this.state.isSorted) {
+      newSortedMoviesFromFoundMovies = sortedMoviesFromFoundMovies.sort(
+        (a, b) => (a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1),
+      );
+    } else {
+      newSortedMoviesFromFoundMovies = sortedMoviesFromFoundMovies.sort(
+        (a, b) => (a.title.toLowerCase() < b.title.toLowerCase() ? 1 : -1),
+      );
+    }
+    this.setState({
+      isSorted: !this.state.isSorted,
+      sortedMovies: newSortedMoviesFromFoundMovies,
+    });
+  }
+
+  toggleSortMovies(evt) {
+    this.sortMovies();
+  }
+
+  searchMovies = searchQuery => {
+    moviesAPI.getAllMovie(searchQuery).then(movies =>
+      this.setState({
+        movies,
+      }),
+    );
+  };
+
   handleChange = evt => {
-    console.dir(evt.target);
-    console.log(evt.target.value);
     this.setState({
       searchQuery: evt.target.value,
     });
@@ -38,14 +98,10 @@ class Movie extends Component {
     if (this.state.searchQuery === '') {
       return;
     }
-    this.props.history.push({
-      search: `?query=${this.state.searchQuery}`,
-    });
-    this.serchMovies(this.state.searchQuery);
   };
 
   render() {
-    const { movies, searchQuery } = this.state;
+    const { movies, searchQuery, foundMovies } = this.state;
     return (
       <Fragment>
         <header>
@@ -56,8 +112,9 @@ class Movie extends Component {
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
             searchQuery={searchQuery}
+            toggleSortMovies={this.toggleSortMovies.bind(this)}
           />
-          <MovieList movies={movies} />
+          <MovieList movies={movies} foundMovies={foundMovies} />
           <Details />
         </main>
       </Fragment>

@@ -1,0 +1,35 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  display: block;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+.container {
+  margin: 0 auto;
+}
+
+.body {
+  /* background-image: url('../accets/images/bg-pattern.png'); */
+  background: linear-gradient(90deg, #bbe1fa, #43b1fa);
+}

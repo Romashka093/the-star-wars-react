@@ -10,16 +10,18 @@ export default {
         .then(movies => movies.data.results);
       return movies;
     } catch (error) {
+      console.log(error);
       throw error;
     }
   },
-  async getMovieFromSearch(query) {
+  async getMovieById(id) {
     try {
-      const movies = await axios
-        .get(`films/`)
-        .then(movies => movies.data.results);
-      return movies;
+      const movie = await axios.get(`films/${id}`);
+      // .then((movie) => movie.data.results)
+      console.log(movie);
+      return movie;
     } catch (error) {
+      console.log(error);
       throw error;
     }
   },

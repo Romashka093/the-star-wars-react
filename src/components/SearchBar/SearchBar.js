@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import ButtonWrap from '../../ui/Button/ButtonWrap';
+import Input from '../../ui/Input/Input';
+
 // import css from './SearchBar.module.css';
 
 function SearchBar({
@@ -8,15 +11,15 @@ function SearchBar({
   toggleSortMovies,
 }) {
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        autoComplete="on"
-        onChange={handleChange}
+    <Fragment>
+      <Input
+        handleSubmit={handleSubmit}
+        handleChange={handleChange}
         value={searchQuery}
-        autoFocus
+        placeholder={'Enter movie name'}
       />
-      <button onClick={toggleSortMovies}>Sort</button>
-    </form>
+      <ButtonWrap name={'Sort'} toggleSortMovies={toggleSortMovies} />
+    </Fragment>
   );
 }
 

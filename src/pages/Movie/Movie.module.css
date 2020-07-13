@@ -1,0 +1,31 @@
+.conteiner {
+  width: 300px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .conteiner {
+    width: 720px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .conteiner {
+    width: 1240px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .conteiner {
+    width: 1400px;
+  }
+}
+
+@media (min-width: 2560px) {
+  .conteiner {
+    width: 2500px;
+  }
+}

@@ -1,8 +1,6 @@
-/* eslint-disable jsx-a11y/anchor-has-content */
 import React from 'react';
 import ItemMovie from '../../ui/ItemMovie/ItemMovie';
 import Details from '../Details/Details';
-
 // import css from './MovieList.module.css';
 
 const MovieList = ({
@@ -12,6 +10,7 @@ const MovieList = ({
   isOpen,
   movieID,
   targetMovie,
+  charactersFromSelectedMovie,
 }) => {
   return (
     <ul>
@@ -24,19 +23,29 @@ const MovieList = ({
                 handleOpenItem={handleOpenItem}
                 name={movie.title}
               />
-              {movieID === movie.episode_id && <Details movies={targetMovie} />}
+              {movieID === movie.episode_id && (
+                <Details
+                  movieID={movieID}
+                  charactersFromSelectedMovie={charactersFromSelectedMovie}
+                  targetMovie={targetMovie}
+                />
+              )}
             </li>
           ))
         : foundMovies.map(movie => (
-            <li key={movie.episode_id}>
+            <li key={movie.episode_id} onClick={handleOpenItem}>
               <ItemMovie
                 id={movie.episode_id}
                 isOpen={isOpen}
                 handleOpenItem={handleOpenItem}
                 name={movie.title}
               />
-              {movieID === foundMovies.episode_id && (
-                <Details movies={targetMovie} />
+              {movieID === movie.episode_id && (
+                <Details
+                  movieID={movieID}
+                  charactersFromSelectedMovie={charactersFromSelectedMovie}
+                  targetMovie={targetMovie}
+                />
               )}
             </li>
           ))}

@@ -6,14 +6,19 @@ const useStyles = makeStyles(theme => ({
   root: {
     '& > *': {
       margin: theme.spacing(1),
-      width: '25ch',
+      width: '20ch',
     },
-
     '& .MuiFormLabel-root': {
+      fontFamily: 'PollerOne',
+    },
+    '& .MuiInputBase-input': {
       fontFamily: 'PollerOne',
     },
     '& .Mui-focused': {
       color: '#EEDB00',
+    },
+    '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+      borderColor: '#EEDB00',
     },
   },
 }));

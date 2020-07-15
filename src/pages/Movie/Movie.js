@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import moviesAPI from '../../services/movies-api';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import MovieList from '../../components/MovieList/MovieList';
-// import Details from '../../components/Details/Details';
 import css from './Movie.module.css';
 
 class Movie extends Component {
@@ -15,6 +14,8 @@ class Movie extends Component {
     isOpen: false,
     movieID: [],
     targetMovie: [],
+
+    charactersFromSelectedMovie: [],
   };
   componentDidMount() {
     moviesAPI.getAllMovie().then(movies => {
@@ -26,6 +27,7 @@ class Movie extends Component {
     if (prevState.searchQuery !== this.state.searchQuery) {
       this.searchMovies(this.state.searchQuery);
       this.toggleSortMovies();
+      // this.getCharactersOfMovie();
       const searchedMovies = this.state.movies;
       const foundMovies = searchedMovies.filter(movie =>
         movie.title
@@ -38,13 +40,6 @@ class Movie extends Component {
   // componentWillUnmount() {
   // 	// убрать слушатели после componentDidMount
   // }
-
-  openMovie = id => {
-    moviesAPI.getMovieById(id).then(movies => {
-      const movieID = movies.data.results;
-      this.setState({ movieID });
-    });
-  };
 
   searchMovies = searchQuery => {
     moviesAPI.getAllMovie(searchQuery).then(movies =>
@@ -106,16 +101,21 @@ class Movie extends Component {
   };
 
   handleOpenItem = evt => {
+    evt.preventDefault();
     const targetId = Number(evt.target.id);
     const foFindMovieFtomTarget = this.state.movies;
     const targetMovie = foFindMovieFtomTarget.filter(
       id => id.episode_id === targetId,
     );
     console.log('targetMovie', targetMovie);
+    const charactersFromSelectedMovie = targetMovie.map(
+      movie => movie.characters,
+    );
     this.setState({
       isOpen: !this.state.isOpen,
       movieID: targetId,
       targetMovie,
+      charactersFromSelectedMovie,
     });
   };
 
@@ -127,6 +127,7 @@ class Movie extends Component {
       isOpen,
       movieID,
       targetMovie,
+      charactersFromSelectedMovie,
     } = this.state;
     return (
       <Fragment>
@@ -147,8 +148,8 @@ class Movie extends Component {
             handleOpenItem={this.handleOpenItem}
             movieID={movieID}
             targetMovie={targetMovie}
+            charactersFromSelectedMovie={charactersFromSelectedMovie}
           />
-          {/* <Details /> */}
         </main>
       </Fragment>
     );

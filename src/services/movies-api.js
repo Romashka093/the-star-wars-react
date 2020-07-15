@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://swapi.dev/api/';
+axios.defaults.baseURL = 'https://swapi.dev/api/';
 
 export default {
   async getAllMovie() {
     try {
       const movies = await axios
-        .get(`films/`)
+        .get(`films/?format=json`)
         .then(movies => movies.data.results);
       return movies;
     } catch (error) {
@@ -14,15 +14,27 @@ export default {
       throw error;
     }
   },
-  async getMovieById(id) {
+
+  async getCharacterById(id) {
     try {
-      const movie = await axios.get(`films/${id}`);
-      // .then((movie) => movie.data.results)
-      console.log(movie);
-      return movie;
+      const character = await axios
+        .get(`people/${id}?format=json`)
+        .then(data => data.data);
+      console.log(character);
+      return character;
+      // http://swapi.dev/api/people/1/
     } catch (error) {
       console.log(error);
       throw error;
     }
   },
+
+  // async getPlanetById(id) {
+  // 	try {
+  // 		const planet = await axios.get(`planets/${id}?format=json`).then((planet) => planet.data);
+  // 		console.log(planet);
+  // 		return planet;
+  // 		// http://swapi.dev/api/planets/1/
+  // 	} catch (error) {}
+  // }
 };

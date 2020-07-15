@@ -2,10 +2,10 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'PollerOne';
 }
 
 body {
+  font-family: 'PollerOne';
   background-color: #252525b7;
   color: #999999;
 }

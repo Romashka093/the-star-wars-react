@@ -7,44 +7,44 @@ const MovieList = ({
   movies,
   foundMovies,
   handleOpenItem,
-  isOpen,
   movieID,
   targetMovie,
   charactersFromSelectedMovie,
+  planetsFromSelectedMovie,
 }) => {
   return (
     <ul>
       {foundMovies.length === 0
         ? movies.map(movie => (
-            <li key={movie.episode_id} onClick={handleOpenItem}>
+            <li key={movie.episode_id}>
               <ItemMovie
                 id={movie.episode_id}
-                isOpen={isOpen}
                 handleOpenItem={handleOpenItem}
                 name={movie.title}
               />
               {movieID === movie.episode_id && (
                 <Details
                   movieID={movieID}
-                  charactersFromSelectedMovie={charactersFromSelectedMovie}
                   targetMovie={targetMovie}
+                  charactersFromSelectedMovie={charactersFromSelectedMovie}
+                  planetsFromSelectedMovie={planetsFromSelectedMovie}
                 />
               )}
             </li>
           ))
         : foundMovies.map(movie => (
-            <li key={movie.episode_id} onClick={handleOpenItem}>
+            <li key={movie.episode_id}>
               <ItemMovie
                 id={movie.episode_id}
-                isOpen={isOpen}
                 handleOpenItem={handleOpenItem}
                 name={movie.title}
               />
               {movieID === movie.episode_id && (
                 <Details
                   movieID={movieID}
-                  charactersFromSelectedMovie={charactersFromSelectedMovie}
                   targetMovie={targetMovie}
+                  charactersFromSelectedMovie={charactersFromSelectedMovie}
+                  planetsFromSelectedMovie={planetsFromSelectedMovie}
                 />
               )}
             </li>

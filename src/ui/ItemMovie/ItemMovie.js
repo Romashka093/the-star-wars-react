@@ -15,11 +15,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function ItemMovie({ name, id }) {
+export default function ItemMovie({ name, id, handleOpenItem }) {
   const classes = useStyles();
 
   return (
-    <Typography className={classes.root}>
+    <Typography className={classes.root} onClick={handleOpenItem}>
       <Link href="#" id={id}>
         {name}
       </Link>

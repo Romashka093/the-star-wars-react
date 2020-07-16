@@ -20,21 +20,21 @@ export default {
       const character = await axios
         .get(`people/${id}?format=json`)
         .then(data => data.data);
-      console.log(character);
       return character;
-      // http://swapi.dev/api/people/1/
     } catch (error) {
       console.log(error);
       throw error;
     }
   },
 
-  // async getPlanetById(id) {
-  // 	try {
-  // 		const planet = await axios.get(`planets/${id}?format=json`).then((planet) => planet.data);
-  // 		console.log(planet);
-  // 		return planet;
-  // 		// http://swapi.dev/api/planets/1/
-  // 	} catch (error) {}
-  // }
+  async getPlanetById(id) {
+    try {
+      const planet = await axios
+        .get(`planets/${id}?format=json`)
+        .then(planet => planet.data);
+      console.log(planet);
+      return planet;
+      // http://swapi.dev/api/planets/1/
+    } catch (error) {}
+  },
 };

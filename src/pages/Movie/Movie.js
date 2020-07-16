@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import moviesAPI from '../../services/movies-api';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import MovieList from '../../components/MovieList/MovieList';
-import css from './Movie.module.css';
+// import css from './Movie.module.css';
 
 class Movie extends Component {
   state = {
@@ -16,6 +16,7 @@ class Movie extends Component {
     targetMovie: [],
 
     charactersFromSelectedMovie: [],
+    planetsFromSelectedMovie: [],
   };
   componentDidMount() {
     moviesAPI.getAllMovie().then(movies => {
@@ -27,7 +28,6 @@ class Movie extends Component {
     if (prevState.searchQuery !== this.state.searchQuery) {
       this.searchMovies(this.state.searchQuery);
       this.toggleSortMovies();
-      // this.getCharactersOfMovie();
       const searchedMovies = this.state.movies;
       const foundMovies = searchedMovies.filter(movie =>
         movie.title
@@ -107,15 +107,19 @@ class Movie extends Component {
     const targetMovie = foFindMovieFtomTarget.filter(
       id => id.episode_id === targetId,
     );
-    console.log('targetMovie', targetMovie);
-    const charactersFromSelectedMovie = targetMovie.map(
-      movie => movie.characters,
-    );
+    const charactersFromSelectedMovie = targetMovie
+      .map(movie => movie.characters)
+      .flat();
+    const planetsFromSelectedMovie = targetMovie
+      .map(movie => movie.planets)
+      .flat();
+
     this.setState({
       isOpen: !this.state.isOpen,
       movieID: targetId,
       targetMovie,
       charactersFromSelectedMovie,
+      planetsFromSelectedMovie,
     });
   };
 
@@ -124,17 +128,17 @@ class Movie extends Component {
       movies,
       searchQuery,
       foundMovies,
-      isOpen,
       movieID,
       targetMovie,
       charactersFromSelectedMovie,
+      planetsFromSelectedMovie,
     } = this.state;
     return (
       <Fragment>
         <header>
-          <h1>The Star Wars movies</h1>
+          <h1>The Star Wars</h1>
         </header>
-        <main className={css.conteiner}>
+        <main>
           <SearchBar
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
@@ -142,13 +146,13 @@ class Movie extends Component {
             toggleSortMovies={this.toggleSortMovies.bind(this)}
           />
           <MovieList
-            isOpen={isOpen}
             movies={movies}
             foundMovies={foundMovies}
             handleOpenItem={this.handleOpenItem}
             movieID={movieID}
             targetMovie={targetMovie}
             charactersFromSelectedMovie={charactersFromSelectedMovie}
+            planetsFromSelectedMovie={planetsFromSelectedMovie}
           />
         </main>
       </Fragment>

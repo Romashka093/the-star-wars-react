@@ -4,12 +4,14 @@ import Accordion from '@material-ui/core/Accordion';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import Typography from '@material-ui/core/Typography';
-// import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: '100%',
     margin: theme.spacing(1),
+    '& .MuiPaper-root': {
+      backgroundColor: '#ffd31d',
+    },
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
@@ -37,7 +39,7 @@ export default function MovieInclude({ items, titleName }) {
         onChange={handleChange('panel1')}
       >
         <AccordionSummary
-          // expandIcon={<ExpandMoreIcon />}
+          expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1bh-content"
           id="panel1bh-header"
         >

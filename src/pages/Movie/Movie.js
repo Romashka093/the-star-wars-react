@@ -2,7 +2,8 @@ import React, { Component, Fragment } from 'react';
 import moviesAPI from '../../services/movies-api';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import MovieList from '../../components/MovieList/MovieList';
-// import css from './Movie.module.css';
+import TitlePage from '../../components/Title/TitlePage';
+import css from './Movie.module.css';
 
 class Movie extends Component {
   state = {
@@ -11,10 +12,9 @@ class Movie extends Component {
     foundMovies: [],
     isSorted: false,
     sortedMovies: [],
-    isOpen: false,
+    isOpen: true,
     movieID: [],
     targetMovie: [],
-
     charactersFromSelectedMovie: [],
     planetsFromSelectedMovie: [],
   };
@@ -37,9 +37,6 @@ class Movie extends Component {
       this.setState({ foundMovies });
     }
   }
-  // componentWillUnmount() {
-  // 	// убрать слушатели после componentDidMount
-  // }
 
   searchMovies = searchQuery => {
     moviesAPI.getAllMovie(searchQuery).then(movies =>
@@ -130,30 +127,36 @@ class Movie extends Component {
       foundMovies,
       movieID,
       targetMovie,
+      isOpen,
       charactersFromSelectedMovie,
       planetsFromSelectedMovie,
     } = this.state;
     return (
       <Fragment>
         <header>
-          <h1>The Star Wars</h1>
+          <h1 className={css.title}>The Star Wars</h1>
         </header>
-        <main>
+        <main className={css.container}>
           <SearchBar
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
             searchQuery={searchQuery}
             toggleSortMovies={this.toggleSortMovies.bind(this)}
           />
-          <MovieList
-            movies={movies}
-            foundMovies={foundMovies}
-            handleOpenItem={this.handleOpenItem}
-            movieID={movieID}
-            targetMovie={targetMovie}
-            charactersFromSelectedMovie={charactersFromSelectedMovie}
-            planetsFromSelectedMovie={planetsFromSelectedMovie}
-          />
+          {movies.length === 0 ? (
+            <TitlePage />
+          ) : (
+            <MovieList
+              isOpen={isOpen}
+              movies={movies}
+              foundMovies={foundMovies}
+              handleOpenItem={this.handleOpenItem}
+              movieID={movieID}
+              targetMovie={targetMovie}
+              charactersFromSelectedMovie={charactersFromSelectedMovie}
+              planetsFromSelectedMovie={planetsFromSelectedMovie}
+            />
+          )}
         </main>
       </Fragment>
     );

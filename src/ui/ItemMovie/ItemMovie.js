@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
@@ -11,6 +10,11 @@ const useStyles = makeStyles(theme => ({
     },
     '& .MuiTypography-colorPrimary': {
       color: '#EEDB00',
+      width: 'fit-content',
+      margin: '0 auto',
+      fontSize: '18px',
+      lineHeight: '2',
+      fontFamily: 'PollerOne',
     },
   },
 }));
@@ -19,8 +23,8 @@ export default function ItemMovie({ name, id, handleOpenItem }) {
   const classes = useStyles();
 
   return (
-    <Typography className={classes.root} onClick={handleOpenItem}>
-      <Link href="#" id={id}>
+    <Typography className={classes.root}>
+      <Link href="#" id={id} onClick={handleOpenItem}>
         {name}
       </Link>
     </Typography>

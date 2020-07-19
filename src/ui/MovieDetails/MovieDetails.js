@@ -9,10 +9,42 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import MovieInclude from './MovieInclude';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   root: {
+    '& > *': {
+      margin: theme.spacing(1),
+      width: '280px',
+      fontSize: '16px',
+      [theme.breakpoints.up('sm')]: {
+        width: '500px',
+        fontSize: '18px',
+      },
+      [theme.breakpoints.up('md')]: {
+        width: '700px',
+        fontSize: '24px',
+      },
+    },
+    '& .MuiTypography-root': {
+      margin: '8px',
+      fontSize: '16px',
+      [theme.breakpoints.up('sm')]: {
+        fontSize: '18px',
+      },
+      [theme.breakpoints.up('md')]: {
+        fontSize: '24px',
+      },
+    },
+    '& .MuiTableCell-root': {
+      fontSize: '16px',
+      [theme.breakpoints.up('sm')]: {
+        fontSize: '18px',
+      },
+      [theme.breakpoints.up('md')]: {
+        fontSize: '24px',
+      },
+    },
     minWidth: 275,
-    backgroundColor: '#ffd',
+    backgroundColor: '#FFE81F85',
   },
   bullet: {
     display: 'inline-block',
@@ -25,18 +57,10 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12,
   },
-});
+}));
 
 export default function MovieDetails({ targetMovie, characters, planets }) {
   const classes = useStyles();
-
-  //       {characters.map(character => (
-  //         <span key={character.url}>{character.name}, </span>
-  //       <span>
-  //         {planets.map(planet => (
-  //           <span key={planet.url}>{planet.name}, </span>
-  //         ))}
-  //       </span>
 
   return (
     <Fragment>

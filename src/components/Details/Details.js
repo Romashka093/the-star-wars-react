@@ -6,9 +6,9 @@ class Details extends Component {
   state = {
     characters: [],
     planets: [],
-    vehicles: [],
-    starships: [],
-    species: [],
+    // vehicles: [],
+    // starships: [],
+    // species: [],
   };
 
   componentDidMount() {
@@ -20,7 +20,6 @@ class Details extends Component {
       charactersFromSelectedMovie,
       planetsFromSelectedMovie,
     } = this.props;
-    console.log(planetsFromSelectedMovie);
 
     const allCharacterUrlFromMovie = charactersFromSelectedMovie.map(url => {
       const forDelete = 'http://swapi.dev/api/people/';

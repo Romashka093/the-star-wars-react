@@ -2,17 +2,18 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles({
   root: {
-    '& > *': {
-      margin: theme.spacing(1),
-    },
     '& .MuiButton-containedPrimary': {
       color: '#151515',
-      backgroundColor: '#EEDB00',
+      backgroundColor: '#FFE81F',
+      fontFamily: 'PollerOne',
+    },
+    '& .MuiButton-root': {
+      padding: '16px',
     },
   },
-}));
+});
 
 export default function ButtonWrap({ name, toggleSortMovies }) {
   const classes = useStyles();

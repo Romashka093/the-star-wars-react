@@ -1,7 +1,5 @@
 import React, { Fragment } from 'react';
-import ButtonWrap from '../../ui/Button/ButtonWrap';
 import Input from '../../ui/Input/Input';
-// import css from './SearchBar.module.css';
 
 function SearchBar({
   handleChange,
@@ -16,8 +14,8 @@ function SearchBar({
         handleChange={handleChange}
         value={searchQuery}
         placeholder={'Enter movie name'}
+        toggleSortMovies={toggleSortMovies}
       />
-      <ButtonWrap name={'Sort'} toggleSortMovies={toggleSortMovies} />
     </Fragment>
   );
 }

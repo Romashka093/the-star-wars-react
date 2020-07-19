@@ -1,14 +1,16 @@
 .conteiner {
   width: 300px;
   margin: 0 auto;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+}
+
+.title {
+  font-family: 'PollerOne';
 }
 
 @media (min-width: 768px) {
   .conteiner {
     width: 720px;
+    margin: 0 auto;
   }
 }
 
